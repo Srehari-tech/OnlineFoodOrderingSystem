@@ -8,3 +8,7 @@
 --     stock INT,
 --     PRIMARY KEY (product_id)
 -- );
+
+INSERT INTO products (product_name,price,description,stock)
+VALUES
+('Chicken Biriyani',150,'Very tasty food',50);
