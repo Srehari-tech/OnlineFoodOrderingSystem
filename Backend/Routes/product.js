@@ -46,4 +46,11 @@ router.post('/', (req, res) => {
   });
 });
 
+//UPDATE A PRODUCT
+router.put('/:id', (req, res) => {
+  let id = req.params.id;
+  const { product_name, price, description, stock } = req.body;
+  const qr = `UPDATE PRODUCTS SET product_name='${product_name}',price=${price},description='${description}',stock=${stock}`;
+});
+
 module.exports = router;
