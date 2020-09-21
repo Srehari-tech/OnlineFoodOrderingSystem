@@ -6,7 +6,8 @@ const con = config.con;
 
 //GET ALL PRODUCTS
 router.get('/', (req, res) => {
-  con.query('SELECT * FROM PRODUCTS', (err, result) => {
+  let qr='SELECT * FROM PRODUCTS'
+  con.query(qr, (err, result) => {
     if (err || result.length == 0) {
       return res.status(400).json({
         message: 'No products found',
@@ -19,7 +20,8 @@ router.get('/', (req, res) => {
 //GET A SINGLE PRODUCT
 router.get('/:id', (req, res) => {
   let id = req.params.id;
-  con.query(`SELECT * FROM PRODUCTS WHERE product_id=${id}`, (err, result) => {
+  let qr = `SELECT * FROM PRODUCTS WHERE product_id=${id}`;
+  con.query(qr, (err, result) => {
     if (err || result.length == 0) {
       return res.status(400).json({
         message: 'No products found',
@@ -63,4 +65,9 @@ router.put('/:id', (req, res) => {
   });
 });
 
+//DELETE A PRODUCT
+router.delete('/:id', (req, res) => {
+  let id = req.params.id;
+  let qr;
+});
 module.exports = router;
