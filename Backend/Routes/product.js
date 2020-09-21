@@ -51,6 +51,16 @@ router.put('/:id', (req, res) => {
   let id = req.params.id;
   const { product_name, price, description, stock } = req.body;
   const qr = `UPDATE PRODUCTS SET product_name='${product_name}',price=${price},description='${description}',stock=${stock}`;
+  con.query(qr, (err, result) => {
+    if (err) {
+      return res.json({
+        message: 'Failed to update',
+      });
+    }
+    res.json({
+      success: 'Successfully updated the product',
+    });
+  });
 });
 
 module.exports = router;
