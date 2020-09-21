@@ -6,7 +6,7 @@ const con = config.con;
 
 //GET ALL PRODUCTS
 router.get('/', (req, res) => {
-  let qr='SELECT * FROM PRODUCTS'
+  let qr = 'SELECT * FROM PRODUCTS';
   con.query(qr, (err, result) => {
     if (err || result.length == 0) {
       return res.status(400).json({
@@ -52,7 +52,7 @@ router.post('/', (req, res) => {
 router.put('/:id', (req, res) => {
   let id = req.params.id;
   const { product_name, price, description, stock } = req.body;
-  const qr = `UPDATE PRODUCTS SET product_name='${product_name}',price=${price},description='${description}',stock=${stock}`;
+  const qr = `UPDATE PRODUCTS SET product_name='${product_name}',price=${price},description='${description}',stock=${stock} WHERE product_id=${id}`;
   con.query(qr, (err, result) => {
     if (err) {
       return res.json({
@@ -65,9 +65,19 @@ router.put('/:id', (req, res) => {
   });
 });
 
-//DELETE A PRODUCT
+// DELETE A PRODUCT
 router.delete('/:id', (req, res) => {
   let id = req.params.id;
-  let qr;
+  let qr = `DELETE FROM PRODUCTS WHERE product_id=${id}`;
+  con.query(qr, (err, result) => {
+    if (err) {
+      return res.json({
+        message: 'Failed to delete the product',
+      });
+    }
+    res.json({
+      success: 'Product deleted successfully',
+    });
+  });
 });
 module.exports = router;
